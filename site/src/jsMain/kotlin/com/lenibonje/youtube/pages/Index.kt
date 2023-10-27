@@ -11,12 +11,14 @@ import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.compose.ui.toAttrs
 import com.varabyte.kobweb.core.Page
+import com.varabyte.kobweb.silk.components.forms.Button
 import com.varabyte.kobweb.silk.components.icons.fa.FaFaceSmile
 import com.varabyte.kobweb.silk.components.icons.fa.IconSize
 import com.varabyte.kobweb.silk.components.icons.fa.IconStyle
 import com.varabyte.kobweb.silk.components.style.ComponentStyle
 import com.varabyte.kobweb.silk.components.style.focus
 import com.varabyte.kobweb.silk.components.style.toModifier
+import com.varabyte.kobweb.silk.theme.colors.rememberColorMode
 import org.jetbrains.compose.web.attributes.InputType
 import org.jetbrains.compose.web.attributes.placeholder
 import org.jetbrains.compose.web.css.*
@@ -33,9 +35,13 @@ fun HomePage() {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         var name by remember { mutableStateOf("") }
+        var colorMode by rememberColorMode()
+
         Row(verticalAlignment = Alignment.CenterVertically) {
             FaFaceSmile(
-                modifier = Modifier.margin(right = 10.px),
+                modifier = Modifier
+                    .color(if (colorMode.isLight) Colors.Black else Theme.Blue.color)
+                    .margin(right = 10.px),
                 style = IconStyle.OUTLINE,
                 size = IconSize.XXL
             )
@@ -64,6 +70,12 @@ fun HomePage() {
                     onInput { name = it.value }
                 }
         )
+
+        Button(modifier = Modifier.margin(top = 24.px),
+            onClick = { colorMode = colorMode.opposite }
+        ) {
+            Text(value = "Change Theme")
+        }
     }
 
 
