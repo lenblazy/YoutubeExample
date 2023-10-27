@@ -1,6 +1,7 @@
 package com.lenibonje.youtube.pages
 
 import androidx.compose.runtime.*
+import com.varabyte.kobweb.compose.css.CSSTransition
 import com.varabyte.kobweb.compose.foundation.layout.Arrangement
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.foundation.layout.Row
@@ -18,10 +19,7 @@ import com.varabyte.kobweb.silk.components.style.focus
 import com.varabyte.kobweb.silk.components.style.toModifier
 import org.jetbrains.compose.web.attributes.InputType
 import org.jetbrains.compose.web.attributes.placeholder
-import org.jetbrains.compose.web.css.CSSColorValue
-import org.jetbrains.compose.web.css.LineStyle
-import org.jetbrains.compose.web.css.px
-import org.jetbrains.compose.web.css.rgb
+import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.Input
 import org.jetbrains.compose.web.dom.P
 import org.jetbrains.compose.web.dom.Text
@@ -60,6 +58,7 @@ fun HomePage() {
                 )
                 .backgroundColor(Theme.Gray.color)
                 .fontSize(20.px)
+                .transition(CSSTransition(property = "border", duration = 300.ms))
                 .toAttrs {
                     placeholder("Enter name")
                     onInput { name = it.value }
